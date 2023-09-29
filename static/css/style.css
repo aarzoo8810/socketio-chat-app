@@ -1,0 +1,93 @@
+body {
+    background-color: #1a1f26;
+    color: #FFFFFF;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+h1 {
+    margin-top: 5rem;
+}
+
+#channels-side {
+    height: 100vh;
+    padding-top: 1rem;
+    background-color: rgb(16, 20, 26);
+    overflow-y: scroll;
+}
+
+#channels-side a {
+    text-decoration: none;
+    color: #FFFFFF;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+#channels-side a:hover {
+    color: antiquewhite;
+    font-size: large;
+}
+
+#chat-side {
+    padding: 0 1rem 0 1rem ;
+}
+
+.side-list{
+    list-style: none;
+    padding-left: 0;
+}
+
+.chat-area {
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.chat-day-date {
+    font-size: smaller;
+    text-align: center;
+    color: darkgray;
+}
+
+.user-chat-pic {
+    display: inline;
+    max-width: 39px;
+}
+
+.user-chat-text {
+    display: inline;
+}
+
+.username {
+    display: inline;
+    font-size: 24px;
+    color: rgb(134, 28, 28);
+}
+
+.chat-datetime {
+    font-size: x-small;
+    color: darkgray;
+    margin-left: 0.5rem;
+}
+
+.message-box {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.inputs input{
+    width: 70%;
+}
+
+
+
+
+
+/* register.html */
+/* .account-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+} */

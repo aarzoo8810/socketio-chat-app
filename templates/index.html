@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% block title %}<title>Chat App</title>{% endblock  %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div id="channels-side" class="col-lg-2 col-md-3 col-sm-2">
+            <ul class="side-list">
+                <li>
+                    <a href="#">
+                        <img src="{{url_for('static', filename='images/ghost.png')}}" height="32px" width="32px"
+                            alt="" />
+                        Ghost Talk
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="{{url_for('static', filename='images/gundam.png')}}" height="32px" width="32px"
+                            alt="" />
+                        Gundam Channel
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="{{url_for('static', filename='images/user.png')}}" height="32px" width="32px"
+                            alt="" />
+                        User Channel
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+        <div id="chat-side" class="col-lg-10 col-md-9 col-sm-10">
+            <div class="chat-area container-fluid">
+                <section id="chat-head">
+                    <h1>Welcome To Ghost Talk</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur pariatur minima,</p>
+                </section>
+                
+                <hr style="margin-bottom: 0;">
+                <p class="chat-day-date" style="text-align: center">24 September, 2023</p>
+                <ul class="side-list" id="chat-list">
+                    <li>
+                        <div class="row">
+                            <div class="col-1 user-chat-pic">
+                                <img src="{{url_for('static', filename='images/gundam.png')}}" height="32px" width="32px"
+                                    alt="username">
+                            </div>
+                            <div class="col-11 user-chat-text">
+                                <h3 class="username">gundam_user_name</h3><span class="chat-datetime">25/09/2023</span>
+                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                                    Doloremque nesciunt placeat similique molestiae obcaecati eos nisi, laboriosam
+                                    exercitationem voluptate aperiam possimus excepturi vitae sit incidunt! Alias et incidunt
+                                    voluptatem deleniti! Doloremque nesciunt placeat similique molestiae obcaecati eos nisi,
+                                    Doloremque nesciunt placeat similique molestiae obcaecati eos nisi,Doloremque nesciunt placeat similique molestiae obcaecati eos nisi, 
+                                <p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="row">
+                            <div class="col-1 user-chat-pic">
+                                <img src="{{url_for('static', filename='images/gundam.png')}}" height="32px" width="32px"
+                                    alt="username">
+                            </div>
+                            <div class="col-11 user-chat-text">
+                                <h3>gundam_user_name</h3>
+                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                                    Doloremque nesciunt placeat similique molestiae obcaecati eos nisi, laboriosam
+                                    exercitationem voluptate aperiam possimus excepturi vitae sit incidunt! Alias et incidunt
+                                    voluptatem deleniti! Doloremque nesciunt placeat similique molestiae obcaecati eos nisi,
+                                    Doloremque nesciunt placeat similique molestiae obcaecati eos nisi,Doloremque nesciunt placeat similique molestiae obcaecati eos nisi, 
+                                <p>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="row">
+                            <div style="display:inline; max-width: 39px;" class="col-1 user-chat-pic">
+                                <img src="{{url_for('static', filename='images/gundam.png')}}" height="32px" width="32px"
+                                    alt="username">
+                            </div>
+                            <div style="display: inline;" class="col-11 user-chat-text">
+                                <h3>gundam_user_name</h3>
+                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                                    Doloremque nesciunt placeat similique molestiae obcaecati eos nisi, laboriosam
+                                    exercitationem voluptate aperiam possimus excepturi vitae sit incidunt! Alias et incidunt
+                                    voluptatem deleniti! Doloremque nesciunt placeat similique molestiae obcaecati eos nisi,
+                                    Doloremque nesciunt placeat similique molestiae obcaecati eos nisi,Doloremque nesciunt placeat similique molestiae obcaecati eos nisi, 
+                                <p>
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+            <div class="message-box">
+                <div class="messages" id="messages"></div>
+                <div class="inputs">
+                    <input type="text" rows="3" placeholder="Message" name="message" id="message" onkeydown="message_input(this)" />
+                    <button type="submit" name="send" id="send-btn" onClick="sendMessage()">
+                        Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" charset="utf-8">
+    var socketio = io();
+
+    const chatList = document.getElementById("chat-list")
+
+    const createMessage = (name, msg) => {
+        const content = `
+        <li>
+            <div class="row">
+                <div class="col-1 user-chat-pic">
+                    <img src="{{url_for('static', filename='images/gundam.png')}}" height="32px" width="32px"
+                        alt="username">
+                </div>
+                <div class="col-11 user-chat-text">
+                    <h3 class="username">gundam_user_name</h3><span class="chat-datetime">25/09/2023</span>
+                    <p>
+                        ${msg}
+                    </p>
+                </div>
+            </div>
+        </li>
+        `
+        chatList.innerHTML += content
+    }
+
+    socketio.on('message', (data) => {
+        createMessage(data.name, data.message)
+    });
+
+    function message_input(ele) {
+        if (event.keyCode == 13) {
+            const message = document.getElementById("message")
+            if (message.value == "") return;
+            socketio.emit("message", {data: message.value});
+            message.value = "";
+        }
+    }
+    const sendMessage = () => {
+        const message = document.getElementById("message")
+        if (message.value == "") return;
+        socketio.emit("message", {data: message.value});
+        message.value = "";
+    }
+</script>
+{% endblock  %}
