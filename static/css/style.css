@@ -26,10 +26,10 @@ h1 {
 
 #channels-side a:hover {
     color: antiquewhite;
-    font-size: large;
 }
 
 #chat-side {
+    height: 100vh;
     padding: 0 1rem 0 1rem ;
 }
 
@@ -39,8 +39,12 @@ h1 {
 }
 
 .chat-area {
-    height: 100vh;
-    overflow-y: scroll;
+    height: 95vh;
+    overflow-y: auto;
+}
+
+#chat-list {
+    margin-bottom: 3rem;
 }
 
 .chat-day-date {
@@ -64,13 +68,14 @@ h1 {
     color: rgb(134, 28, 28);
 }
 
-.chat-datetime {
+.chat-local-datetime {
     font-size: x-small;
     color: darkgray;
     margin-left: 0.5rem;
 }
 
 .message-box {
+    display: block;
     position: fixed;
     bottom: 0;
     width: 100%;

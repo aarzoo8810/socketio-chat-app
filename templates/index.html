@@ -7,12 +7,20 @@
         <div id="channels-side" class="col-lg-2 col-md-3 col-sm-2">
             <ul class="side-list">
                 <li>
-                    <a href="#">
+                    <div class="">
+                        <a style="display: inline;" href="{{url_for('create_channel')}}" title="create-channel"><img src="{{url_for('static', filename='images/plus.png')}}" alt="sign-up" height="24px"></a>
+                        <a style="display: inline;" href="{{url_for('register')}}" title="sign-up"><img src="{{url_for('static', filename='images/log-in.png')}}" alt="sign-up" height="24px"></a>
+                    </div>
+                </li>
+                {% for channel in channels %}
+                <li>
+                    <a href="{{url_for('channel', channel_id=channel.id)}}">
                         <img src="{{url_for('static', filename='images/ghost.png')}}" height="32px" width="32px"
                             alt="" />
-                        Ghost Talk
+                        {{channel.name}}
                     </a>
                 </li>
+                {% endfor %}
                 <li>
                     <a href="#">
                         <img src="{{url_for('static', filename='images/gundam.png')}}" height="32px" width="32px"
@@ -37,40 +45,43 @@
                     <h1>Welcome To Ghost Talk</h1>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur pariatur minima,</p>
                 </section>
-                
+
                 <hr style="margin-bottom: 0;">
                 <p class="chat-day-date" style="text-align: center">24 September, 2023</p>
                 <ul class="side-list" id="chat-list">
+                    {% for chat in chats %}
                     <li>
                         <div class="row">
                             <div class="col-1 user-chat-pic">
-                                <img src="{{url_for('static', filename='images/gundam.png')}}" height="32px" width="32px"
-                                    alt="username">
+                                <img src="{{url_for('static', filename='images/gundam.png')}}" height="32px"
+                                    width="32px" alt="username">
                             </div>
                             <div class="col-11 user-chat-text">
-                                <h3 class="username">gundam_user_name</h3><span class="chat-datetime">25/09/2023</span>
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                    Doloremque nesciunt placeat similique molestiae obcaecati eos nisi, laboriosam
-                                    exercitationem voluptate aperiam possimus excepturi vitae sit incidunt! Alias et incidunt
-                                    voluptatem deleniti! Doloremque nesciunt placeat similique molestiae obcaecati eos nisi,
-                                    Doloremque nesciunt placeat similique molestiae obcaecati eos nisi,Doloremque nesciunt placeat similique molestiae obcaecati eos nisi, 
+                                <h3 class="username">{{chat.users.username}}</h3><span
+                                    class="chat-local-datetime">{{chat.datetime.isoformat()}}</span>
+                                <p>
+                                    {{chat.chat_text}}
                                 <p>
                             </div>
                         </div>
                     </li>
+                    {% endfor %}
                     <li>
                         <div class="row">
                             <div class="col-1 user-chat-pic">
-                                <img src="{{url_for('static', filename='images/gundam.png')}}" height="32px" width="32px"
-                                    alt="username">
+                                <img src="{{url_for('static', filename='images/gundam.png')}}" height="32px"
+                                    width="32px" alt="username">
                             </div>
                             <div class="col-11 user-chat-text">
                                 <h3>gundam_user_name</h3>
                                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                                     Doloremque nesciunt placeat similique molestiae obcaecati eos nisi, laboriosam
-                                    exercitationem voluptate aperiam possimus excepturi vitae sit incidunt! Alias et incidunt
-                                    voluptatem deleniti! Doloremque nesciunt placeat similique molestiae obcaecati eos nisi,
-                                    Doloremque nesciunt placeat similique molestiae obcaecati eos nisi,Doloremque nesciunt placeat similique molestiae obcaecati eos nisi, 
+                                    exercitationem voluptate aperiam possimus excepturi vitae sit incidunt! Alias et
+                                    incidunt
+                                    voluptatem deleniti! Doloremque nesciunt placeat similique molestiae obcaecati eos
+                                    nisi,
+                                    Doloremque nesciunt placeat similique molestiae obcaecati eos nisi,Doloremque
+                                    nesciunt placeat similique molestiae obcaecati eos nisi,
                                 <p>
                             </div>
                         </div>
@@ -79,30 +90,38 @@
                     <li>
                         <div class="row">
                             <div style="display:inline; max-width: 39px;" class="col-1 user-chat-pic">
-                                <img src="{{url_for('static', filename='images/gundam.png')}}" height="32px" width="32px"
-                                    alt="username">
+                                <img src="{{url_for('static', filename='images/gundam.png')}}" height="32px"
+                                    width="32px" alt="username">
                             </div>
                             <div style="display: inline;" class="col-11 user-chat-text">
                                 <h3>gundam_user_name</h3>
                                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                                     Doloremque nesciunt placeat similique molestiae obcaecati eos nisi, laboriosam
-                                    exercitationem voluptate aperiam possimus excepturi vitae sit incidunt! Alias et incidunt
-                                    voluptatem deleniti! Doloremque nesciunt placeat similique molestiae obcaecati eos nisi,
-                                    Doloremque nesciunt placeat similique molestiae obcaecati eos nisi,Doloremque nesciunt placeat similique molestiae obcaecati eos nisi, 
+                                    exercitationem voluptate aperiam possimus excepturi vitae sit incidunt! Alias et
+                                    incidunt
+                                    voluptatem deleniti! Doloremque nesciunt placeat similique molestiae obcaecati eos
+                                    nisi,
+                                    Doloremque nesciunt placeat similique molestiae obcaecati eos nisi,Doloremque
+                                    nesciunt placeat similique molestiae obcaecati eos nisi,
                                 <p>
                             </div>
                         </div>
                     </li>
-                    
+
                 </ul>
-            </div>
-            <div class="message-box">
-                <div class="messages" id="messages"></div>
-                <div class="inputs">
-                    <input type="text" rows="3" placeholder="Message" name="message" id="message" onkeydown="message_input(this)" />
-                    <button type="submit" name="send" id="send-btn" onClick="sendMessage()">
-                        Send
-                    </button>
+                <div class="message-box">
+                    <div class="messages" id="messages"></div>
+                    {% if current_user.is_authenticated %}
+                    <div class="inputs">
+                        <input type="text" rows="3" placeholder="Message" name="message" id="message"
+                            onkeydown="message_input(this)" />
+                        <button type="submit" name="send" id="send-btn" onClick="sendMessage()">
+                            Send
+                        </button>
+                    </div>
+                    {% else %}
+                    <a href="{{url_for('login')}}" style="color: red;"><strong>Login to chat</strong></a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -110,10 +129,30 @@
 </div>
 <script type="text/javascript" charset="utf-8">
     var socketio = io();
+    const chatDateTimeElements = document.querySelectorAll(".chat-local-datetime");
+    chatDateTimeElements.forEach(function (element) {
+        const chatDate = element.textContent;
+        convertTime(chatDate, element)
+    })
+
+    function convertTime(chatDate, element) {
+        // Get the UTC timestamp from the template
+        const utcTime = new Date(chatDate + 'Z');
+        // Get the user's local time zone
+        const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+        // Convert the UTC timestamp to the user's local time zone
+        const localTimestamp = utcTime.toLocaleString('en-US', { timeZone: userTimezone });
+        console.log(localTimestamp)
+        const localTime = utcTime.toLocaleTimeString([], { timeZone: userTimezone, hour: '2-digit', minute: '2-digit' });
+        console.log(localTime)
+        // Display the local timestamp on the page
+        element.textContent = localTimestamp;
+    }
 
     const chatList = document.getElementById("chat-list")
 
-    const createMessage = (name, msg) => {
+    const createMessage = (name, msg, username, datetime) => {
         const content = `
         <li>
             <div class="row">
@@ -122,7 +161,7 @@
                         alt="username">
                 </div>
                 <div class="col-11 user-chat-text">
-                    <h3 class="username">gundam_user_name</h3><span class="chat-datetime">25/09/2023</span>
+                    <h3 class="username">${username}</h3><span class="chat-local-datetime">${datetime}</span>
                     <p>
                         ${msg}
                     </p>
@@ -134,22 +173,37 @@
     }
 
     socketio.on('message', (data) => {
-        createMessage(data.name, data.message)
+        createMessage(data.name, data.message, data.username, data.datetime);
+        pageScroll();
+        const chatDateList = document.getElementsByClassName("chat-local-datetime");
+        const lastChatDateElement = chatDateList[chatDateList.length - 1];
+        console.log(lastChatDateElement)
+        convertTime(lastChatDateElement.textContent, lastChatDateElement)
     });
 
+    function pageScroll() {
+        var chatList = document.getElementById("chat-list");
+        const lastLi = chatList.lastElementChild;
+        lastLi.scrollIntoView({ behavior: "smooth", block: "start" }); // horizontal and vertical scroll increments
+    }
     function message_input(ele) {
         if (event.keyCode == 13) {
             const message = document.getElementById("message")
             if (message.value == "") return;
-            socketio.emit("message", {data: message.value});
+            socketio.emit("message", { data: message.value });
             message.value = "";
+            setTimeout(pageScroll(), 100)
+
         }
     }
     const sendMessage = () => {
         const message = document.getElementById("message")
         if (message.value == "") return;
-        socketio.emit("message", {data: message.value});
+        socketio.emit("message", { data: message.value });
         message.value = "";
+        pageScroll();
     }
+    window.onload = pageScroll;
+
 </script>
 {% endblock  %}
