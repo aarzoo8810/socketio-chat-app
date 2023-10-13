@@ -189,7 +189,6 @@ def connect(auth):
 
     if room:
         join_room(room)
-        send({"name": name, "message": "has entered the room."}, to=room)
         print(f"{name} joined room {room}")
 
 
