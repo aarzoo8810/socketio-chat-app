@@ -90,12 +90,13 @@ def create_channel():
         else:
             print(f"Error: Channel {channel_name} already exists.")
 
-
+    session["channel_id"] = None
     return render_template("create_channel.html", form=form)
 
 
 @app.route("/channel/<int:channel_id>")
 def channel(channel_id):
+    session["channel_id"] = channel_id
     channels = Channel.query.all()
     chats = Chat.query.filter_by(channel_id=channel_id).all()
     if current_user.is_authenticated:
@@ -137,7 +138,11 @@ def login():
             if check_password_hash(user.password, password):
                     login_user(user)
                     # flash("Successfully logged in.")
-                    return redirect(url_for('home'))
+                    channel_id = session["channel_id"]
+                    if not channel_id:
+                        return redirect(url_for("home"))
+                    else:
+                        return redirect(url_for("channel", channel_id=channel_id))
     
     return render_template("register.html", form=form)
 
