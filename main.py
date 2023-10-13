@@ -40,6 +40,7 @@ class Channel(db.Model):
     __tablename__ = "channels"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String, nullable=False)
+    description = db.Column(db.String, nullable=False)
     chats = db.relationship("Chat", backref="channels", lazy=True)
 
 class Chat(db.Model):
@@ -55,11 +56,16 @@ with app.app_context():
     db.create_all()
 
     try:
+        # Add Two Users and Channels for testing purpose
         first_user = User(username="admin", email="admin@mail.com", password=generate_password_hash("admin"))
-        db.session.add(first_user)
-        db.session.commit()
         second_user = User(username="mushoku", email="mushoku@mail.com", password=generate_password_hash("mushoku"))
+        first_channel = Channel(name="World News", description="This Channel is about World News. Now be civil.")
+        second_channel = Channel(name="Cars", description="This Channel is about Cars. Now be civil.")
+        db.session.add(first_user)
         db.session.add(second_user)
+        db.session.add(first_channel)
+        db.session.add(second_channel)
+
         db.session.commit()
     except:
         pass
@@ -81,10 +87,11 @@ def create_channel():
 
     if request.method == "POST" and form.validate_on_submit:
         channel_name = form.channel_name.data.strip()
+        description = form.description.data.strip()
         
         channel_entry = Channel.query.filter_by(name=channel_name).first()
         if not channel_entry:
-            new_channel = Channel(name=channel_name)
+            new_channel = Channel(name=channel_name, description=description)
             db.session.add(new_channel)
             db.session.commit()
         else:
@@ -97,15 +104,17 @@ def create_channel():
 @app.route("/channel/<int:channel_id>")
 def channel(channel_id):
     session["channel_id"] = channel_id
+
+    channel = Channel.query.filter_by(id=channel_id).first()
     channels = Channel.query.all()
     chats = Chat.query.filter_by(channel_id=channel_id).all()
+
     if current_user.is_authenticated:
-        print(current_user.is_authenticated)
         session["channel_id"] = channel_id
         session["username"] = current_user.username
-        return render_template("index.html", chats=chats, channels=channels)
-
-    return render_template("index.html", chats=chats, channels=channels)
+        return render_template("index.html", channel=channel, chats=chats, channels=channels)
+    
+    return render_template("index.html", channel=channel, chats=chats, channels=channels)
 
 
 @app.route("/register", methods=["GET", "POST"])

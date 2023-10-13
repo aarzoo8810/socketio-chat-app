@@ -7,7 +7,7 @@
         <div id="channels-side" class="col-lg-2 col-md-3 col-sm-2">
             <ul class="side-list">
                 <li>
-                    <div class="">
+                    <div>
                         <a style="display: inline;" href="{{url_for('create_channel')}}" title="create-channel"><img src="{{url_for('static', filename='images/plus.png')}}" alt="sign-up" height="24px"></a>
                         <a style="display: inline;" href="{{url_for('register')}}" title="sign-up"><img src="{{url_for('static', filename='images/log-in.png')}}" alt="sign-up" height="24px"></a>
                     </div>
@@ -21,20 +21,6 @@
                     </a>
                 </li>
                 {% endfor %}
-                <li>
-                    <a href="#">
-                        <img src="{{url_for('static', filename='images/gundam.png')}}" height="32px" width="32px"
-                            alt="" />
-                        Gundam Channel
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="{{url_for('static', filename='images/user.png')}}" height="32px" width="32px"
-                            alt="" />
-                        User Channel
-                    </a>
-                </li>
             </ul>
         </div>
 
@@ -42,8 +28,8 @@
         <div id="chat-side" class="col-lg-10 col-md-9 col-sm-10">
             <div class="chat-area container-fluid">
                 <section id="chat-head">
-                    <h1>Welcome To Ghost Talk</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur pariatur minima,</p>
+                    <h1>{{channel.name}}</h1>
+                    <p>{{channel.description}}</p>
                 </section>
 
                 <hr style="margin-bottom: 0;">

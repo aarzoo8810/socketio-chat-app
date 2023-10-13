@@ -20,4 +20,5 @@ class LoginForm (FlaskForm):
 
 class CreateChannelForm(FlaskForm):
     channel_name = StringField("Channel Name", validators=[DataRequired()])
+    description = StringField("About This Channel", validators=[DataRequired()])
     submit = SubmitField("Create")
