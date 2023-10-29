@@ -147,13 +147,13 @@ def login():
             if check_password_hash(user.password, password):
                     login_user(user)
                     # flash("Successfully logged in.")
-                    channel_id = session["channel_id"]
+                    channel_id = session.get("channel_id")
                     if not channel_id:
-                        return redirect(url_for("home"))
+                        return redirect(url_for("channel", channel_id=1))
                     else:
                         return redirect(url_for("channel", channel_id=channel_id))
     
-    return render_template("register.html", form=form)
+    return render_template("register.html", form=form, login=True)
 
 
 @app.route("/logout")
@@ -175,9 +175,7 @@ def message(data):
             "username": current_user.username,
             "datetime": new_chat.datetime.isoformat()
         }
-        print(new_chat.datetime)
         send(content, to=room)
-        print(content)
     else:
         return
 

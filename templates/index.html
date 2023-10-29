@@ -26,89 +26,104 @@
 
 
         <div id="chat-side" class="col-lg-10 col-md-9 col-sm-10">
-            <div class="chat-area container-fluid">
-                <section id="chat-head">
-                    <h1>{{channel.name}}</h1>
-                    <p>{{channel.description}}</p>
-                </section>
+            <div class="cotainer-fluid">
+                {% if channel%}
+                <div class="chat-area">
+                    <section id="chat-head">
+                        {% if channel %}
+                        <h1>{{channel.name}}</h1>
+                        <p>{{channel.description}}</p>
+                        {% endif %}
+                    </section>
 
-                <hr style="margin-bottom: 0;">
-                <p class="chat-day-date" style="text-align: center">24 September, 2023</p>
-                <ul class="side-list" id="chat-list">
-                    {% for chat in chats %}
-                    <li>
-                        <div class="row">
-                            <div class="col-1 user-chat-pic">
-                                <img src="{{url_for('static', filename='images/gundam.png')}}" height="32px"
-                                    width="32px" alt="username">
+                    <hr style="margin-bottom: 0;">
+                    <p class="chat-day-date" style="text-align: center">24 September, 2023</p>
+                    <ul class="side-list" id="chat-list">
+                        {% for chat in chats %}
+                        <li>
+                            <div class="row">
+                                <div class="col-1 user-chat-pic">
+                                    <img src="{{url_for('static', filename='images/gundam.png')}}" height="32px"
+                                        width="32px" alt="username">
+                                </div>
+                                <div class="col-11 user-chat-text">
+                                    <h3 class="username">{{chat.users.username}}</h3><span
+                                        class="chat-local-datetime">{{chat.datetime.isoformat()}}</span>
+                                    <p>
+                                        {{chat.chat_text}}
+                                    <p>
+                                </div>
                             </div>
-                            <div class="col-11 user-chat-text">
-                                <h3 class="username">{{chat.users.username}}</h3><span
-                                    class="chat-local-datetime">{{chat.datetime.isoformat()}}</span>
-                                <p>
-                                    {{chat.chat_text}}
-                                <p>
+                        </li>
+                        {% endfor %}
+                        <li>
+                            <div class="row">
+                                <div class="col-1 user-chat-pic">
+                                    <img src="{{url_for('static', filename='images/gundam.png')}}" height="32px"
+                                        width="32px" alt="username">
+                                </div>
+                                <div class="col-11 user-chat-text">
+                                    <h3>gundam_user_name</h3>
+                                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                                        Doloremque nesciunt placeat similique molestiae obcaecati eos nisi, laboriosam
+                                        exercitationem voluptate aperiam possimus excepturi vitae sit incidunt! Alias et
+                                        incidunt
+                                        voluptatem deleniti! Doloremque nesciunt placeat similique molestiae obcaecati eos
+                                        nisi,
+                                        Doloremque nesciunt placeat similique molestiae obcaecati eos nisi,Doloremque
+                                        nesciunt placeat similique molestiae obcaecati eos nisi,
+                                    <p>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    {% endfor %}
-                    <li>
-                        <div class="row">
-                            <div class="col-1 user-chat-pic">
-                                <img src="{{url_for('static', filename='images/gundam.png')}}" height="32px"
-                                    width="32px" alt="username">
-                            </div>
-                            <div class="col-11 user-chat-text">
-                                <h3>gundam_user_name</h3>
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                    Doloremque nesciunt placeat similique molestiae obcaecati eos nisi, laboriosam
-                                    exercitationem voluptate aperiam possimus excepturi vitae sit incidunt! Alias et
-                                    incidunt
-                                    voluptatem deleniti! Doloremque nesciunt placeat similique molestiae obcaecati eos
-                                    nisi,
-                                    Doloremque nesciunt placeat similique molestiae obcaecati eos nisi,Doloremque
-                                    nesciunt placeat similique molestiae obcaecati eos nisi,
-                                <p>
-                            </div>
-                        </div>
-                    </li>
+                        </li>
 
-                    <li>
-                        <div class="row">
-                            <div style="display:inline; max-width: 39px;" class="col-1 user-chat-pic">
-                                <img src="{{url_for('static', filename='images/gundam.png')}}" height="32px"
-                                    width="32px" alt="username">
+                        <li>
+                            <div class="row">
+                                <div style="display:inline; max-width: 39px;" class="col-1 user-chat-pic">
+                                    <img src="{{url_for('static', filename='images/gundam.png')}}" height="32px"
+                                        width="32px" alt="username">
+                                </div>
+                                <div style="display: inline;" class="col-11 user-chat-text">
+                                    <h3>gundam_user_name</h3>
+                                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                                        Doloremque nesciunt placeat similique molestiae obcaecati eos nisi, laboriosam
+                                        exercitationem voluptate aperiam possimus excepturi vitae sit incidunt! Alias et
+                                        incidunt
+                                        voluptatem deleniti! Doloremque nesciunt placeat similique molestiae obcaecati eos
+                                        nisi,
+                                        Doloremque nesciunt placeat similique molestiae obcaecati eos nisi,Doloremque
+                                        nesciunt placeat similique molestiae obcaecati eos nisi,
+                                    <p>
+                                </div>
                             </div>
-                            <div style="display: inline;" class="col-11 user-chat-text">
-                                <h3>gundam_user_name</h3>
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                    Doloremque nesciunt placeat similique molestiae obcaecati eos nisi, laboriosam
-                                    exercitationem voluptate aperiam possimus excepturi vitae sit incidunt! Alias et
-                                    incidunt
-                                    voluptatem deleniti! Doloremque nesciunt placeat similique molestiae obcaecati eos
-                                    nisi,
-                                    Doloremque nesciunt placeat similique molestiae obcaecati eos nisi,Doloremque
-                                    nesciunt placeat similique molestiae obcaecati eos nisi,
-                                <p>
-                            </div>
-                        </div>
-                    </li>
+                        </li>
 
-                </ul>
-                <div class="message-box">
-                    <div class="messages" id="messages"></div>
-                    {% if current_user.is_authenticated %}
-                    <div class="inputs">
-                        <input type="text" rows="3" placeholder="Message" name="message" id="message"
-                            onkeydown="message_input(this)" />
-                        <button type="submit" name="send" id="send-btn" onClick="sendMessage()">
-                            Send
-                        </button>
+                    </ul>
+                    <div class="message-box">
+                        <div class="messages" id="messages"></div>
+                        {% if current_user.is_authenticated %}
+                        <div class="inputs">
+                            <input type="text" rows="3" placeholder="Message" name="message" id="message"
+                                onkeydown="message_input(this)" />
+                            <button type="submit" name="send" id="send-btn" onClick="sendMessage()">
+                                Send
+                            </button>
+                        </div>
+                        {% else %}
+                        <a href="{{url_for('login')}}" style="color: red;"><strong>Login to chat</strong></a>
+                        {% endif %}
                     </div>
-                    {% else %}
-                    <a href="{{url_for('login')}}" style="color: red;"><strong>Login to chat</strong></a>
-                    {% endif %}
                 </div>
+                {% else %}
+                    {% if current_user.is_authenticated %}
+                    {% else %}
+                        <div class="home-account-btn">
+                            <h1>Welcome, Chat About Anything Here</h1>
+                            <a class="btn btn-primary home-account-btn" href="{{url_for('login')}}">Login</a>
+                            <a class="btn btn-primary home-account-btn" href="{{url_for('register')}}">Sign Up</a>
+                        </div>
+                    {% endif%}
+                {% endif %}
             </div>
         </div>
     </div>

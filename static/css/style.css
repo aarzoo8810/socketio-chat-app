@@ -85,7 +85,15 @@ h1 {
 }
 
 
+.home-account-btn {
+    text-align: center;
+    margin-top: 15rem;
+}
 
+.home-account-btn a {
+    width: 6rem;
+    margin: 1rem;
+}
 
 
 /* register.html */
